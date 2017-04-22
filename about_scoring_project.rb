@@ -29,8 +29,23 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 #
 # Your goal is to write the score method.
 
+SET_COEFFS = { 1 => 1000, 2 => 200, 3 => 300, 4 => 400, 5 => 500, 6 => 600 }
+SINGLE_COEFFS = { 1 => 100, 2 => 0, 3 => 0, 4 => 0, 5 => 50, 6 => 0 }
+
 def score(dice)
   # You need to write this method
+  sum = 0
+  unique_dice = dice.uniq
+  unique_dice.each do |num|
+    count = dice.count(num)
+    if count >= 3
+      sum += SET_COEFFS[num]
+      sum += (count - 3) * SINGLE_COEFFS[num]
+    else
+      sum += count * SINGLE_COEFFS[num]
+    end
+  end
+  sum
 end
 
 class AboutScoringProject < Neo::Koan

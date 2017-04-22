@@ -15,6 +15,18 @@
 #
 def triangle(a, b, c)
   # WRITE THIS CODE
+  a, b, c = [a, b, c].sort
+  if a <= 0
+    raise TriangleError.new("Side can't be less or equal to zero")
+  elsif (a + b) <= c
+    raise TriangleError.new("One side can't be more or equal to the sum of others")
+  elsif a == b && b == c
+    :equilateral
+  elsif a == b || a == c || b == c
+    :isosceles
+  else
+    :scalene
+  end
 end
 
 # Error class used in part 2.  No need to change this code.
